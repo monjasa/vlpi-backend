@@ -2,7 +2,7 @@ package org.monjasa.vpli.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.monjasa.vpli.domain.MainUser;
-import org.monjasa.vpli.dto.MainUserRequest;
+import org.monjasa.vpli.dto.request.MainUserRequest;
 import org.monjasa.vpli.dto.MainUserDto;
 import org.monjasa.vpli.repository.MainUserRepository;
 import org.monjasa.vpli.service.MainUserService;

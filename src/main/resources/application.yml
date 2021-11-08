@@ -2,10 +2,12 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/vlpi
     username: postgres
-    password: ${DATASOURCE_PASSWORD}
+    password: password
   jpa:
-    show-sql: true
     hibernate:
       ddl-auto: none
   liquibase:
     enabled: true
+logging:
+  level:
+    org.hibernate.SQL: debug

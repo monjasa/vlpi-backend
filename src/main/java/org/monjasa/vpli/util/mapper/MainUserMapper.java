@@ -3,7 +3,7 @@ package org.monjasa.vpli.util.mapper;
 import org.mapstruct.Mapper;
 import org.monjasa.vpli.domain.MainUser;
 import org.monjasa.vpli.dto.MainUserDto;
-import org.monjasa.vpli.dto.MainUserRequest;
+import org.monjasa.vpli.dto.request.MainUserRequest;
 
 @Mapper(componentModel = "spring")
 public interface MainUserMapper {
