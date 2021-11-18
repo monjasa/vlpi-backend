@@ -5,10 +5,5 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class MainUserRequest {
-
-    private String firstName;
-
-    private String lastName;
-
+public class ExerciseAnswerRequest {
 }
