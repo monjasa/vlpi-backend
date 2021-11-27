@@ -1,3 +1,19 @@
 databaseChangeLog:
   - include:
-      file: /db/changelog/migrations/20211108211200-create-table-main-user.sql
+      file: /db/changelog/migrations/20211108211200-create-table-user-account.sql
+  - include:
+      file: /db/changelog/migrations/20211127194000-create-table-role.sql
+  - include:
+      file: /db/changelog/migrations/20211127194200-create-table-user-account-role.sql
+  - include:
+      file: /db/changelog/migrations/20211127194500-create-table-module.sql
+  - include:
+      file: /db/changelog/migrations/20211127194800-create-table-exercise.sql
+  - include:
+      file: /db/changelog/migrations/20211127195400-create-table-task.sql
+  - include:
+      file: /db/changelog/migrations/20211127203100-create-table-solution-block.sql
+  - include:
+      file: /db/changelog/migrations/20211127203500-create-table-exercise-answer.sql
+  - include:
+      file: /db/changelog/migrations/20211127203900-create-table-task-answer.sql
