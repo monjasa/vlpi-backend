@@ -2,18 +2,18 @@ package org.monjasa.vpli.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.monjasa.vpli.domain.base.AuditableEntity;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import java.util.Set;
 
 @Getter
 @Setter
 @Entity
-public class UserAccount {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class UserAccount extends AuditableEntity<Long> {
 
     private String email;
 

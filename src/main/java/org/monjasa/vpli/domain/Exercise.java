@@ -2,6 +2,7 @@ package org.monjasa.vpli.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.monjasa.vpli.domain.base.SoftDeletedEntity;
 
 import javax.persistence.*;
 import java.util.List;
@@ -9,11 +10,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-public class Exercise {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Exercise extends SoftDeletedEntity<Long> {
 
     private String name;
 

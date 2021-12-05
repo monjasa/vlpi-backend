@@ -6,6 +6,7 @@ import org.monjasa.vpli.dto.ExerciseListItemDto;
 import org.monjasa.vpli.dto.common.PersistableDto;
 import org.monjasa.vpli.dto.request.ExerciseRequest;
 import org.monjasa.vpli.service.ExerciseService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,12 +23,13 @@ public class ExerciseController {
         return exerciseService.getById(exerciseId);
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public List<ExerciseListItemDto> getAllByModuleId(@RequestParam Long moduleId) {
         return exerciseService.getAllByModuleId(moduleId);
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMINISTRATOR')")
     public PersistableDto create(@RequestBody ExerciseRequest request) {
         return exerciseService.create(request);
     }

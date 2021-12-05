@@ -25,7 +25,7 @@ public class UserAccountController {
         return userAccountService.getById(userAccountId);
     }
 
-    @GetMapping
+    @GetMapping("/all")
     @PreAuthorize("hasRole('ADMINISTRATOR')")
     public List<UserAccountListItemDto> getAll() {
         return userAccountService.getAll();
