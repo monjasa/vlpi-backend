@@ -17,3 +17,5 @@ databaseChangeLog:
       file: /db/changelog/migrations/20211127203500-create-table-exercise-answer.sql
   - include:
       file: /db/changelog/migrations/20211127203900-create-table-task-answer.sql
+  - include:
+      file: /db/changelog/migrations/20211204231300-insert-administrator-and-student-roles.sql

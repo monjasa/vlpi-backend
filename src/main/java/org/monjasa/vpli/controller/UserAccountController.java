@@ -3,10 +3,12 @@ package org.monjasa.vpli.controller;
 import lombok.RequiredArgsConstructor;
 import org.monjasa.vpli.dto.UserAccountDto;
 import org.monjasa.vpli.dto.UserAccountListItemDto;
-import org.monjasa.vpli.dto.request.UserAccountAuthenticationRequest;
-import org.monjasa.vpli.dto.request.UserAccountRegistrationRequest;
 import org.monjasa.vpli.service.UserAccountService;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -18,22 +20,14 @@ public class UserAccountController {
     private final UserAccountService userAccountService;
 
     @GetMapping("/{userAccountId}")
+    @PreAuthorize("hasRole('ADMINISTRATOR')")
     public UserAccountDto getById(@PathVariable Long userAccountId) {
         return userAccountService.getById(userAccountId);
     }
 
     @GetMapping
+    @PreAuthorize("hasRole('ADMINISTRATOR')")
     public List<UserAccountListItemDto> getAll() {
         return userAccountService.getAll();
-    }
-
-    @PostMapping("/registration")
-    public void register(@RequestBody UserAccountRegistrationRequest request) {
-        userAccountService.register(request);
-    }
-
-    @PostMapping("/authentication")
-    public void authenticate(@RequestBody UserAccountAuthenticationRequest request) {
-        userAccountService.authenticate(request);
     }
 }

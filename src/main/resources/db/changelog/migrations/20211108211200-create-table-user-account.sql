@@ -6,7 +6,6 @@ create table user_account
     id               bigserial,
     email            varchar(255),
     password         varchar(255),
-    enabled          boolean,
     first_name       varchar(255),
     last_name        varchar(255),
     created_by       varchar(255),

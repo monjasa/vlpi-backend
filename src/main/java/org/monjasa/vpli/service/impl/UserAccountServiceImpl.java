@@ -3,8 +3,6 @@ package org.monjasa.vpli.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.monjasa.vpli.dto.UserAccountDto;
 import org.monjasa.vpli.dto.UserAccountListItemDto;
-import org.monjasa.vpli.dto.request.UserAccountAuthenticationRequest;
-import org.monjasa.vpli.dto.request.UserAccountRegistrationRequest;
 import org.monjasa.vpli.repository.UserAccountRepository;
 import org.monjasa.vpli.service.UserAccountService;
 import org.monjasa.vpli.util.mapper.UserAccountMapper;
@@ -27,16 +25,6 @@ public class UserAccountServiceImpl implements UserAccountService {
 
     @Override
     public List<UserAccountListItemDto> getAll() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void register(UserAccountRegistrationRequest request) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void authenticate(UserAccountAuthenticationRequest request) {
         throw new UnsupportedOperationException();
     }
 }
