@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ExerciseListItemDto {
+public class ModuleListItemDto {
 
     private Long id;
 

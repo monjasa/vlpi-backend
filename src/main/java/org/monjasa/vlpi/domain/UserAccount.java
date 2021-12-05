@@ -13,7 +13,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-public class UserAccount extends AuditableEntity<Long> {
+public class UserAccount extends AuditableEntity {
 
     private String email;
 

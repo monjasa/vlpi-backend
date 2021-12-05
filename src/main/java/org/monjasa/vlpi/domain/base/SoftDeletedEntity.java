@@ -4,12 +4,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.MappedSuperclass;
-import java.io.Serializable;
 
 @Getter
 @Setter
 @MappedSuperclass
-public abstract class SoftDeletedEntity<PK extends Serializable> extends AuditableEntity<PK> {
+public abstract class SoftDeletedEntity extends AuditableEntity {
 
     protected Boolean isDeleted = false;
 

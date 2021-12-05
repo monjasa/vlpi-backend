@@ -11,14 +11,13 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public abstract class AuditableEntity<PK extends Serializable> extends PersistableEntity<PK> {
+public abstract class AuditableEntity extends PersistableEntity {
 
     @CreatedBy
     protected String createdBy;

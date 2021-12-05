@@ -10,9 +10,11 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-public class Exercise extends SoftDeletedEntity<Long> {
+public class Exercise extends SoftDeletedEntity {
 
     private String name;
+
+    private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Module module;
