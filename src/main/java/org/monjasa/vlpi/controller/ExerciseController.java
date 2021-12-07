@@ -23,6 +23,7 @@ public class ExerciseController {
 
     @GetMapping("/{exerciseId}")
     public ExerciseDto getExerciseById(@PathVariable Long exerciseId) {
+        log.info("Getting exercise by id: {}", exerciseId);
         return exerciseService.getById(exerciseId);
     }
 

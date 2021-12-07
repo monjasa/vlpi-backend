@@ -10,7 +10,7 @@ import org.monjasa.vlpi.domain.UserAccount;
 public interface UserAccountMapper {
 
     @Mapping(target = "email", source = "username")
-    UserAccount toUserAccount(RegistrationRequest request);
+    UserAccount toUserAccount(RegistrationRequest registrationRequest);
 
     UserAccountDto toDto(UserAccount userAccount);
 

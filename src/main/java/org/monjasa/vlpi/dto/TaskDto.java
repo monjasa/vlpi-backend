@@ -7,14 +7,14 @@ import java.util.List;
 
 @Getter
 @Setter
-public class ExerciseDto {
+public class TaskDto {
 
     private Long id;
 
-    private String name;
+    private String question;
 
-    private String description;
+    private Integer score;
 
-    private List<TaskDto> tasks;
+    private List<SolutionBlockDto> solutionBlocks;
 
 }

@@ -1,8 +1,8 @@
 package org.monjasa.vlpi.repository;
 
 import org.monjasa.vlpi.domain.UserAccount;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -10,10 +10,10 @@ import java.util.Optional;
 @Repository
 public interface UserAccountRepository extends JpaRepository<UserAccount, Long> {
 
-    @Query("select userAccount from UserAccount userAccount " +
-            "join fetch userAccount.roles roles " +
-            "where userAccount.email = :email")
     Optional<UserAccount> findByEmail(String email);
+
+    @EntityGraph(attributePaths = "roles")
+    Optional<UserAccount> findFetchingRolesByEmail(String email);
 
     boolean existsByEmail(String email);
 

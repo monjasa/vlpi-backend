@@ -29,7 +29,13 @@ public class ExerciseServiceImpl implements ExerciseService {
 
     @Override
     public ExerciseDto getById(Long exerciseId) {
-        throw new UnsupportedOperationException();
+        Exercise exercise = exerciseRepository.findById(exerciseId)
+                .orElseThrow(NotFoundException::new);
+
+        ExerciseDto exerciseDto = exerciseMapper.toDto(exercise);
+        exerciseDto.setTasks(taskService.getAllByExerciseId(exerciseId));
+
+        return exerciseDto;
     }
 
     @Override

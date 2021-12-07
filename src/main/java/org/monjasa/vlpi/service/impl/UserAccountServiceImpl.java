@@ -8,8 +8,6 @@ import org.monjasa.vlpi.repository.UserAccountRepository;
 import org.monjasa.vlpi.security.service.PrincipalUserDetailsService;
 import org.monjasa.vlpi.service.UserAccountService;
 import org.monjasa.vlpi.util.mapper.UserAccountMapper;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,9 +24,7 @@ public class UserAccountServiceImpl implements UserAccountService {
 
     @Override
     public UserAccountDto getCurrent() {
-        UserDetails userDetails = principalUserDetailsService.loadAuthenticatedUser();
-        UserAccount userAccount = userAccountRepository.findByEmail(userDetails.getUsername())
-                .orElseThrow(() -> new UsernameNotFoundException("User account not found"));
+        UserAccount userAccount = principalUserDetailsService.loadAuthenticatedUser();
         return userAccountMapper.toDto(userAccount);
     }
 

@@ -1,12 +1,13 @@
 package org.monjasa.vlpi.security.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.monjasa.vlpi.security.dto.request.RegistrationRequest;
-import org.monjasa.vlpi.security.service.PrincipalUserDetailsService;
 import org.monjasa.vlpi.domain.Role;
 import org.monjasa.vlpi.domain.UserAccount;
 import org.monjasa.vlpi.repository.RoleRepository;
 import org.monjasa.vlpi.repository.UserAccountRepository;
+import org.monjasa.vlpi.security.domain.PrincipalUserDetails;
+import org.monjasa.vlpi.security.dto.request.RegistrationRequest;
+import org.monjasa.vlpi.security.service.PrincipalUserDetailsService;
 import org.monjasa.vlpi.security.util.mapper.UserDetailsMapper;
 import org.monjasa.vlpi.util.mapper.UserAccountMapper;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -33,20 +34,24 @@ public class PrincipalUserDetailsServiceImpl implements PrincipalUserDetailsServ
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserAccount userAccount = userAccountRepository.findByEmail(username)
+        UserAccount userAccount = userAccountRepository.findFetchingRolesByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User account not found"));
+
         return userDetailsMapper.toPrincipalUserDetails(userAccount);
     }
 
     @Override
-    public UserDetails loadAuthenticatedUser() {
-        return (UserDetails) SecurityContextHolder.getContext()
+    public UserAccount loadAuthenticatedUser() {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext()
                 .getAuthentication()
                 .getPrincipal();
+
+        return userAccountRepository.findByEmail(userDetails.getUsername())
+                .orElseThrow(() -> new UsernameNotFoundException("User account not found"));
     }
 
     @Override
-    public UserDetails createUser(RegistrationRequest request) {
+    public PrincipalUserDetails createUser(RegistrationRequest request) {
         if (userAccountRepository.existsByEmail(request.getUsername())) {
             throw new IllegalArgumentException();
         }
