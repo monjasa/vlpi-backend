@@ -2,6 +2,7 @@ package org.monjasa.vlpi.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.monjasa.vlpi.domain.base.AuditableEntity;
 
 import javax.persistence.*;
 import java.util.List;
@@ -9,17 +10,11 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-public class Task {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Task extends AuditableEntity {
 
     private String question;
 
-    private String solution;
-
-    private String score;
+    private Integer score;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Exercise exercise;

@@ -6,7 +6,6 @@ create table solution_block
     id               bigserial,
     text             varchar(1024),
     solution_order   int,
-    display_order    int,
     task_id          bigint,
     created_by       varchar(255),
     created_at       timestamp,

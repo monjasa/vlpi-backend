@@ -1,4 +1,4 @@
-package org.monjasa.vlpi.security.controller;
+package org.monjasa.vlpi.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -20,14 +20,14 @@ public class AuthenticationController {
     private final AuthenticationService authenticationService;
 
     @PostMapping
-    public AccessTokenDto authenticate(@RequestBody AuthenticationRequest request) {
-        log.info("Processing authentication request for username: {}", request.getUsername());
-        return authenticationService.authenticate(request);
+    public AccessTokenDto authenticate(@RequestBody AuthenticationRequest authenticationRequest) {
+        log.info("Processing authentication request for username: {}", authenticationRequest.getUsername());
+        return authenticationService.authenticate(authenticationRequest);
     }
 
     @PostMapping("/registration")
-    public AccessTokenDto register(@RequestBody RegistrationRequest request) {
-        log.info("Processing registration request for username: {}", request.getUsername());
-        return authenticationService.register(request);
+    public AccessTokenDto register(@RequestBody RegistrationRequest registrationRequest) {
+        log.info("Processing registration request for username: {}", registrationRequest.getUsername());
+        return authenticationService.register(registrationRequest);
     }
 }

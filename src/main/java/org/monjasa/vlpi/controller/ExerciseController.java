@@ -3,10 +3,11 @@ package org.monjasa.vlpi.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.monjasa.vlpi.dto.ExerciseDto;
-import org.monjasa.vlpi.dto.request.ExerciseRequest;
-import org.monjasa.vlpi.service.ExerciseService;
 import org.monjasa.vlpi.dto.ExerciseListItemDto;
 import org.monjasa.vlpi.dto.common.PersistableDto;
+import org.monjasa.vlpi.dto.request.ExerciseRequest;
+import org.monjasa.vlpi.dto.request.TaskRequest;
+import org.monjasa.vlpi.service.ExerciseService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,7 +34,15 @@ public class ExerciseController {
 
     @PostMapping
     @PreAuthorize("hasRole('ADMINISTRATOR')")
-    public PersistableDto createExercise(@RequestBody ExerciseRequest request) {
-        return exerciseService.create(request);
+    public PersistableDto createExercise(@RequestBody ExerciseRequest exerciseRequest) {
+        log.info("Creating exercise");
+        return exerciseService.create(exerciseRequest);
+    }
+
+    @PostMapping("/{exerciseId}/task")
+    @PreAuthorize("hasRole('ADMINISTRATOR')")
+    public PersistableDto createTaskByExerciseId(@PathVariable Long exerciseId, @RequestBody TaskRequest taskRequest) {
+        log.info("Creating task for exercise with id: {}", exerciseId);
+        return exerciseService.createTaskByExerciseId(exerciseId, taskRequest);
     }
 }
