@@ -9,6 +9,7 @@ import org.monjasa.vlpi.repository.RoleRepository;
 import org.monjasa.vlpi.repository.UserAccountRepository;
 import org.monjasa.vlpi.security.util.mapper.UserDetailsMapper;
 import org.monjasa.vlpi.util.mapper.UserAccountMapper;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -35,6 +36,13 @@ public class PrincipalUserDetailsServiceImpl implements PrincipalUserDetailsServ
         UserAccount userAccount = userAccountRepository.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User account not found"));
         return userDetailsMapper.toPrincipalUserDetails(userAccount);
+    }
+
+    @Override
+    public UserDetails loadAuthenticatedUser() {
+        return (UserDetails) SecurityContextHolder.getContext()
+                .getAuthentication()
+                .getPrincipal();
     }
 
     @Override

@@ -1,6 +1,7 @@
 package org.monjasa.vlpi.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.monjasa.vlpi.dto.UserAccountDto;
 import org.monjasa.vlpi.dto.UserAccountListItemDto;
 import org.monjasa.vlpi.service.UserAccountService;
@@ -12,12 +13,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@Log4j2
 @RestController
 @RequestMapping("/api/user")
 @RequiredArgsConstructor
 public class UserAccountController {
 
     private final UserAccountService userAccountService;
+
+    @GetMapping("/current")
+    public UserAccountDto getCurrentUserAccount() {
+        log.info("Getting user account for authenticated user");
+        return userAccountService.getCurrent();
+    }
 
     @GetMapping("/{userAccountId}")
     @PreAuthorize("hasRole('ADMINISTRATOR')")

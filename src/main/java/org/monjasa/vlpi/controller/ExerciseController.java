@@ -21,19 +21,19 @@ public class ExerciseController {
     private final ExerciseService exerciseService;
 
     @GetMapping("/{exerciseId}")
-    public ExerciseDto getById(@PathVariable Long exerciseId) {
+    public ExerciseDto getExerciseById(@PathVariable Long exerciseId) {
         return exerciseService.getById(exerciseId);
     }
 
     @GetMapping("/all")
-    public List<ExerciseListItemDto> getAllByModuleId(@RequestParam Long moduleId) {
+    public List<ExerciseListItemDto> getAllExercisesByModuleId(@RequestParam Long moduleId) {
         log.info("Getting all exercises by module id: {}", moduleId);
         return exerciseService.getAllByModuleId(moduleId);
     }
 
     @PostMapping
     @PreAuthorize("hasRole('ADMINISTRATOR')")
-    public PersistableDto create(@RequestBody ExerciseRequest request) {
+    public PersistableDto createExercise(@RequestBody ExerciseRequest request) {
         return exerciseService.create(request);
     }
 }

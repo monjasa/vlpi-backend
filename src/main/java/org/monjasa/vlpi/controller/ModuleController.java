@@ -19,7 +19,7 @@ public class ModuleController {
     private final ModuleService moduleService;
 
     @GetMapping("/all")
-    public List<ModuleListItemDto> getAll() {
+    public List<ModuleListItemDto> getAllModules() {
         log.info("Getting all modules");
         return moduleService.getAll();
     }

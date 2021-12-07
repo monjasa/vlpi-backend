@@ -6,6 +6,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 public interface PrincipalUserDetailsService extends UserDetailsService {
 
+    UserDetails loadAuthenticatedUser();
+
     UserDetails createUser(RegistrationRequest request);
 
 }

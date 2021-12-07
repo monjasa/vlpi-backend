@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface UserAccountService {
 
+    UserAccountDto getCurrent();
+
     UserAccountDto getById(Long userAccountId);
 
     List<UserAccountListItemDto> getAll();
