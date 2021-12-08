@@ -4,7 +4,7 @@
 create table exercise_answer
 (
     id               bigserial,
-    text             varchar(1024),
+    exercise_id      bigint,
     user_account_id  bigint,
     created_by       varchar(255),
     created_at       timestamp,
@@ -12,6 +12,10 @@ create table exercise_answer
     last_modified_at timestamp,
     constraint pk_exercise_answer primary key (id)
 );
+
+alter table exercise_answer
+    add constraint fk_exercise_answer_exercise
+        foreign key (exercise_id) references exercise (id);
 
 alter table exercise_answer
     add constraint fk_exercise_answer_user_account

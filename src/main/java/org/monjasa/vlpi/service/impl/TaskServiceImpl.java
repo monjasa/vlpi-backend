@@ -31,9 +31,8 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public PersistableDto create(Exercise exercise, TaskRequest taskRequest) {
-        Task task = taskMapper.toEntity(taskRequest);
-        task.setExercise(exercise);
+    public PersistableDto create(TaskRequest taskRequest, Exercise exercise) {
+        Task task = taskMapper.toEntity(taskRequest, exercise);
         return taskMapper.toPersistableDto(taskRepository.save(task));
     }
 }

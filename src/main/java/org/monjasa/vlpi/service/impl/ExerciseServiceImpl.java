@@ -56,6 +56,6 @@ public class ExerciseServiceImpl implements ExerciseService {
     public PersistableDto createTaskByExerciseId(Long exerciseId, TaskRequest taskRequest) {
         Exercise exercise = exerciseRepository.findById(exerciseId)
                 .orElseThrow(NotFoundException::new);
-        return taskService.create(exercise, taskRequest);
+        return taskService.create(taskRequest, exercise);
     }
 }

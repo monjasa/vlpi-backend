@@ -5,5 +5,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class TaskAnswerResultDto {
+public class TaskAnswerDto {
+
+    private Long id;
+
+    private Integer score;
+
 }

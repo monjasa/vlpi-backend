@@ -1,14 +1,14 @@
 package org.monjasa.vlpi.service;
 
-import org.monjasa.vlpi.dto.TaskAnswerResultDto;
+import org.monjasa.vlpi.dto.TaskAnswerDto;
 import org.monjasa.vlpi.dto.common.PersistableDto;
 import org.monjasa.vlpi.dto.request.ExerciseAnswerRequest;
 import org.monjasa.vlpi.dto.request.TaskAnswerRequest;
 
 public interface ExerciseAnswerService {
 
-    PersistableDto create(ExerciseAnswerRequest request);
+    PersistableDto create(ExerciseAnswerRequest exerciseAnswerRequest);
 
-    TaskAnswerResultDto createTaskAnswer(Long exerciseAnswerId, TaskAnswerRequest request);
+    TaskAnswerDto createTaskAnswerByExerciseAnswerId(Long exerciseAnswerId, TaskAnswerRequest taskAnswerRequest);
 
 }

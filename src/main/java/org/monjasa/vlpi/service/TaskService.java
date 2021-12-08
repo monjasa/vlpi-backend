@@ -11,6 +11,6 @@ public interface TaskService {
 
     List<TaskDto> getAllByExerciseId(Long exerciseId);
 
-    PersistableDto create(Exercise exercise, TaskRequest taskRequest);
+    PersistableDto create(TaskRequest taskRequest, Exercise exercise);
 
 }
