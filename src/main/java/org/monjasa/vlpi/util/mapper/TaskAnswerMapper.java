@@ -1,7 +1,7 @@
 package org.monjasa.vlpi.util.mapper;
 
-import org.mapstruct.*;
-import org.monjasa.vlpi.domain.ExerciseAnswer;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.monjasa.vlpi.domain.TaskAnswer;
 import org.monjasa.vlpi.dto.TaskAnswerDto;
 import org.monjasa.vlpi.dto.request.TaskAnswerRequest;
@@ -10,12 +10,9 @@ import org.monjasa.vlpi.dto.request.TaskAnswerRequest;
 public interface TaskAnswerMapper {
 
     @Mapping(target = "task.id", source = "taskId")
-    TaskAnswer toEntity(TaskAnswerRequest taskAnswerRequest, @Context ExerciseAnswer exerciseAnswer);
+    @Mapping(target = "exerciseAnswer.id", source = "exerciseAnswerId")
+    TaskAnswer toEntity(TaskAnswerRequest taskAnswerRequest);
 
     TaskAnswerDto toDto(TaskAnswer taskAnswer);
 
-    @AfterMapping
-    default void afterToEntity(@MappingTarget TaskAnswer taskAnswer, @Context ExerciseAnswer exerciseAnswer) {
-        taskAnswer.setExerciseAnswer(exerciseAnswer);
-    }
 }

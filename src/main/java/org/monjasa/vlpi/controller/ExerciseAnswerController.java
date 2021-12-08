@@ -2,12 +2,13 @@ package org.monjasa.vlpi.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.monjasa.vlpi.dto.TaskAnswerDto;
 import org.monjasa.vlpi.dto.common.PersistableDto;
 import org.monjasa.vlpi.dto.request.ExerciseAnswerRequest;
-import org.monjasa.vlpi.dto.request.TaskAnswerRequest;
 import org.monjasa.vlpi.service.ExerciseAnswerService;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @Log4j2
 @RestController
@@ -21,13 +22,5 @@ public class ExerciseAnswerController {
     public PersistableDto createExerciseAnswer(@RequestBody ExerciseAnswerRequest exerciseAnswerRequest) {
         log.info("Creating exercise answer");
         return exerciseAnswerService.create(exerciseAnswerRequest);
-    }
-
-    @PostMapping("/{exerciseAnswerId}/task-answer")
-    public TaskAnswerDto createTaskAnswerByExerciseAnswerId(
-            @PathVariable Long exerciseAnswerId,
-            @RequestBody TaskAnswerRequest taskAnswerRequest) {
-        log.info("Creating task answer for exercise answer with id: {}", exerciseAnswerId);
-        return exerciseAnswerService.createTaskAnswerByExerciseAnswerId(exerciseAnswerId, taskAnswerRequest);
     }
 }

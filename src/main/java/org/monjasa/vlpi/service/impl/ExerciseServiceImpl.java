@@ -6,7 +6,6 @@ import org.monjasa.vlpi.dto.ExerciseDto;
 import org.monjasa.vlpi.dto.ExerciseListItemDto;
 import org.monjasa.vlpi.dto.common.PersistableDto;
 import org.monjasa.vlpi.dto.request.ExerciseRequest;
-import org.monjasa.vlpi.dto.request.TaskRequest;
 import org.monjasa.vlpi.exception.NotFoundException;
 import org.monjasa.vlpi.repository.ExerciseRepository;
 import org.monjasa.vlpi.service.ExerciseService;
@@ -48,14 +47,7 @@ public class ExerciseServiceImpl implements ExerciseService {
 
     @Override
     public PersistableDto create(ExerciseRequest exerciseRequest) {
-        Exercise exercise = exerciseRepository.save(exerciseMapper.toEntity(exerciseRequest));
-        return exerciseMapper.toPersistableDto(exercise);
-    }
-
-    @Override
-    public PersistableDto createTaskByExerciseId(Long exerciseId, TaskRequest taskRequest) {
-        Exercise exercise = exerciseRepository.findById(exerciseId)
-                .orElseThrow(NotFoundException::new);
-        return taskService.create(taskRequest, exercise);
+        Exercise exercise = exerciseMapper.toEntity(exerciseRequest);
+        return exerciseMapper.toPersistableDto(exerciseRepository.save(exercise));
     }
 }

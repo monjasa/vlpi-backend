@@ -13,6 +13,8 @@ public class TaskRequest {
 
     private Integer score;
 
+    private Long exerciseId;
+
     private List<SolutionBlockRequest> solutionBlocks;
 
 }

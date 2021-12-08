@@ -1,7 +1,6 @@
 package org.monjasa.vlpi.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.monjasa.vlpi.domain.Exercise;
 import org.monjasa.vlpi.domain.Task;
 import org.monjasa.vlpi.dto.TaskDto;
 import org.monjasa.vlpi.dto.common.PersistableDto;
@@ -31,8 +30,8 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public PersistableDto create(TaskRequest taskRequest, Exercise exercise) {
-        Task task = taskMapper.toEntity(taskRequest, exercise);
+    public PersistableDto create(TaskRequest taskRequest) {
+        Task task = taskMapper.toEntity(taskRequest);
         return taskMapper.toPersistableDto(taskRepository.save(task));
     }
 }

@@ -39,11 +39,4 @@ public class ExerciseController {
         log.info("Creating exercise");
         return exerciseService.create(exerciseRequest);
     }
-
-    @PostMapping("/{exerciseId}/task")
-    @PreAuthorize("hasRole('ADMINISTRATOR')")
-    public PersistableDto createTaskByExerciseId(@PathVariable Long exerciseId, @RequestBody TaskRequest taskRequest) {
-        log.info("Creating task for exercise with id: {}", exerciseId);
-        return exerciseService.createTaskByExerciseId(exerciseId, taskRequest);
-    }
 }

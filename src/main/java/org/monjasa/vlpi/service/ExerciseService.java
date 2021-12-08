@@ -16,6 +16,4 @@ public interface ExerciseService {
 
     PersistableDto create(ExerciseRequest exerciseRequest);
 
-    PersistableDto createTaskByExerciseId(Long exerciseId, TaskRequest taskRequest);
-
 }

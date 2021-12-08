@@ -11,6 +11,8 @@ public class TaskAnswerRequest {
 
     private Long taskId;
 
+    private Long exerciseAnswerId;
+
     private List<Long> solutionBlockIds;
 
 }

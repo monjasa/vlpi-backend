@@ -1,7 +1,6 @@
 package org.monjasa.vlpi.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.monjasa.vlpi.domain.ExerciseAnswer;
 import org.monjasa.vlpi.domain.SolutionBlock;
 import org.monjasa.vlpi.domain.Task;
 import org.monjasa.vlpi.domain.TaskAnswer;
@@ -34,11 +33,11 @@ public class TaskAnswerServiceImpl implements TaskAnswerService {
     private final TaskAnswerMapper taskAnswerMapper;
 
     @Override
-    public TaskAnswerDto create(TaskAnswerRequest taskAnswerRequest, ExerciseAnswer exerciseAnswer) {
+    public TaskAnswerDto create(TaskAnswerRequest taskAnswerRequest) {
         Task task = taskRepository.findById(taskAnswerRequest.getTaskId())
                 .orElseThrow(NotFoundException::new);
 
-        TaskAnswer taskAnswer = taskAnswerMapper.toEntity(taskAnswerRequest, exerciseAnswer);
+        TaskAnswer taskAnswer = taskAnswerMapper.toEntity(taskAnswerRequest);
         taskAnswer.setScore(getScore(taskAnswerRequest, task));
         return taskAnswerMapper.toDto(taskAnswerRepository.save(taskAnswer));
     }
