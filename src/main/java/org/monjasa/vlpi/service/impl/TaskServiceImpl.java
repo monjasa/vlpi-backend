@@ -5,6 +5,7 @@ import org.monjasa.vlpi.domain.Task;
 import org.monjasa.vlpi.dto.TaskDto;
 import org.monjasa.vlpi.dto.common.PersistableDto;
 import org.monjasa.vlpi.dto.request.TaskRequest;
+import org.monjasa.vlpi.exception.NotFoundException;
 import org.monjasa.vlpi.repository.TaskRepository;
 import org.monjasa.vlpi.service.TaskService;
 import org.monjasa.vlpi.util.mapper.TaskMapper;
@@ -33,5 +34,13 @@ public class TaskServiceImpl implements TaskService {
     public PersistableDto create(TaskRequest taskRequest) {
         Task task = taskMapper.toEntity(taskRequest);
         return taskMapper.toPersistableDto(taskRepository.save(task));
+    }
+
+    @Override
+    public void deleteById(Long taskId) {
+        Task task = taskRepository.findById(taskId)
+                .orElseThrow(NotFoundException::new);
+
+        taskRepository.delete(task);
     }
 }

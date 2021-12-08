@@ -6,8 +6,8 @@ import org.monjasa.vlpi.dto.ExerciseDto;
 import org.monjasa.vlpi.dto.ExerciseListItemDto;
 import org.monjasa.vlpi.dto.common.PersistableDto;
 import org.monjasa.vlpi.dto.request.ExerciseRequest;
-import org.monjasa.vlpi.dto.request.TaskRequest;
 import org.monjasa.vlpi.service.ExerciseService;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,5 +38,13 @@ public class ExerciseController {
     public PersistableDto createExercise(@RequestBody ExerciseRequest exerciseRequest) {
         log.info("Creating exercise");
         return exerciseService.create(exerciseRequest);
+    }
+
+    @DeleteMapping("/{exerciseId}")
+    @PreAuthorize("hasRole('ADMINISTRATOR')")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteExerciseById(@PathVariable Long exerciseId) {
+        log.info("Deleting exercise by id: {}", exerciseId);
+        exerciseService.deleteById(exerciseId);
     }
 }

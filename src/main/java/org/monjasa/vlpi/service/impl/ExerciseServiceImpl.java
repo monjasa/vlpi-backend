@@ -39,7 +39,7 @@ public class ExerciseServiceImpl implements ExerciseService {
 
     @Override
     public List<ExerciseListItemDto> getAllByModuleId(Long moduleId) {
-        return exerciseRepository.findAllByModuleId(moduleId)
+        return exerciseRepository.findAllByModuleIdAndIsDeletedFalse(moduleId)
                 .stream()
                 .map(exerciseMapper::toListItemDto)
                 .collect(Collectors.toList());
@@ -49,5 +49,14 @@ public class ExerciseServiceImpl implements ExerciseService {
     public PersistableDto create(ExerciseRequest exerciseRequest) {
         Exercise exercise = exerciseMapper.toEntity(exerciseRequest);
         return exerciseMapper.toPersistableDto(exerciseRepository.save(exercise));
+    }
+
+    @Override
+    public void deleteById(Long exerciseId) {
+        Exercise exercise = exerciseRepository.findById(exerciseId)
+                .orElseThrow(NotFoundException::new);
+
+        exercise.setIsDeleted(true);
+        exerciseRepository.save(exercise);
     }
 }

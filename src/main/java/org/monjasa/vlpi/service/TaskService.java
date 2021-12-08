@@ -12,4 +12,6 @@ public interface TaskService {
 
     PersistableDto create(TaskRequest taskRequest);
 
+    void deleteById(Long taskId);
+
 }

@@ -5,11 +5,9 @@ import lombok.extern.log4j.Log4j2;
 import org.monjasa.vlpi.dto.common.PersistableDto;
 import org.monjasa.vlpi.dto.request.TaskRequest;
 import org.monjasa.vlpi.service.TaskService;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Log4j2
 @RestController
@@ -24,5 +22,13 @@ public class TaskController {
     public PersistableDto createTask(@RequestBody TaskRequest taskRequest) {
         log.info("Creating task for exercise with id: {}", taskRequest.getExerciseId());
         return taskService.create(taskRequest);
+    }
+
+    @DeleteMapping("/{taskId}")
+    @PreAuthorize("hasRole('ADMINISTRATOR')")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteTaskById(@PathVariable Long taskId) {
+        log.info("Deleting task by id: {}", taskId);
+        taskService.deleteById(taskId);
     }
 }
