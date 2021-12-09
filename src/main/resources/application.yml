@@ -11,7 +11,7 @@ spring:
   security:
     jwt:
       secret-key: MxEtMCRaAjPHcpTy23x3jgbiRq73BUOapk8HmHQsVkMXCyETtsjN5sgFXC3w0wV5hevjTrVe58WRTMwRMI1uaA==
-      access-token-expires-in: 3600
+      access-token-expires-in: 86400
 logging:
   level:
     org.hibernate.SQL: debug
