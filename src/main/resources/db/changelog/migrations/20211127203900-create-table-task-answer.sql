@@ -5,6 +5,7 @@ create table task_answer
 (
     id                 bigserial,
     score              int,
+    is_solution        boolean,
     task_id            bigint,
     exercise_answer_id bigint,
     created_by         varchar(255),

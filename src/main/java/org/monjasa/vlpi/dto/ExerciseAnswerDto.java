@@ -3,14 +3,14 @@ package org.monjasa.vlpi.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
-public class TaskAnswerDto {
+public class ExerciseAnswerDto {
 
     private Long id;
 
-    private Integer score;
-
-    private Boolean isSolution;
+    private List<TaskAnswerDto> taskAnswers;
 
 }

@@ -38,29 +38,27 @@ public class TaskAnswerServiceImpl implements TaskAnswerService {
                 .orElseThrow(NotFoundException::new);
 
         TaskAnswer taskAnswer = taskAnswerMapper.toEntity(taskAnswerRequest);
-        taskAnswer.setScore(getScore(taskAnswerRequest, task));
+        taskAnswer.setIsSolution(isTaskAnswerSolution(taskAnswerRequest));
+        taskAnswer.setScore(taskAnswer.getIsSolution() ? task.getScore() : SCORE_NOT_SOLUTION);
+
         return taskAnswerMapper.toDto(taskAnswerRepository.save(taskAnswer));
     }
 
-    private int getScore(TaskAnswerRequest taskAnswerRequest, Task task) {
-        List<SolutionBlock> solutionBlocks = solutionBlockRepository.findAllForSolutionByTaskId(task.getId());
-        return isSolution(solutionBlocks, taskAnswerRequest.getSolutionBlockIds())
-                ? task.getScore()
-                : SCORE_NOT_SOLUTION;
-    }
-
-    private boolean isSolution(List<SolutionBlock> solutionBlocks, List<Long> solutionBlockIds) {
+    private boolean isTaskAnswerSolution(TaskAnswerRequest taskAnswerRequest) {
+        List<SolutionBlock> solutionBlocks = solutionBlockRepository.findAllForSolutionByTaskId(taskAnswerRequest.getTaskId());
         Iterator<SolutionBlock> solutionBlockIterator = solutionBlocks.iterator();
-        Iterator<Long> solutionBlockIdIterator = solutionBlockIds.iterator();
+        Iterator<Long> taskAnswerSolutionBlockIdIterator = taskAnswerRequest.getSolutionBlockIds().iterator();
 
-        while (solutionBlockIdIterator.hasNext() && solutionBlockIterator.hasNext()) {
-            SolutionBlock solutionBlock = solutionBlockIterator.next();
-            Long solutionBlockId = solutionBlockIdIterator.next();
-            if (!Objects.equals(solutionBlock.getId(), solutionBlockId)) {
+        while (taskAnswerSolutionBlockIdIterator.hasNext() && solutionBlockIterator.hasNext()) {
+            if (!isSolutionBlockMatched(solutionBlockIterator.next(), taskAnswerSolutionBlockIdIterator.next())) {
                 return false;
             }
         }
 
-        return !solutionBlockIdIterator.hasNext() && !solutionBlockIterator.hasNext();
+        return !taskAnswerSolutionBlockIdIterator.hasNext() && !solutionBlockIterator.hasNext();
+    }
+
+    private boolean isSolutionBlockMatched(SolutionBlock solutionBlock, Long taskAnswerSolutionBlockId) {
+        return Objects.equals(solutionBlock.getId(), taskAnswerSolutionBlockId);
     }
 }
